@@ -72,7 +72,7 @@ Story: As a user, I would like to be able to specify the number of events I want
 
 **When** the user selects the option to change the number of events displayed
 
-**Then** the page should update to display the selected number of events. And the user should be able to see the selected number of events on the page.
+**Then** the page should update to display the selected number of events and the user should be able to see the selected number of events on the page.
 
 FEATURE 4: USE THE APP WHEN OFFLINE
 
@@ -86,13 +86,13 @@ Story: As a user, I would like to be able to use the app when offline so that I 
 
 **Then** the page should display the cached data from the user's previous session
 
-**Scenario 2: Show error when user changes the settings (city, time range)**
+**Scenario 2: Show error when user changes the settings (city, number of events)**
 
 **Given** that the user has opened the events page 
 
 **When** the user tries to change the city or number of events settings
 
-**Then** the page should display an error message to inform the user that the action is not allowed, and the page should not update to show events for the newly selected city and time range.
+**Then** the page should display an error message to inform the user that the action is not allowed and the page should not update to show events for the newly selected city and number of events.
 
 FEATURE 5: DATA VISUALIZATION
 
@@ -100,8 +100,8 @@ Story: As a user, I would like to be able to see a chart showing the upcoming ev
 
 **Scenario: Show a chart with the number of upcoming events in each city**
 
-**Given** that the user has opened the events page, and there are upcoming events in multiple cities
+**Given** that the user has opened the events page and there are upcoming events in multiple cities
 
 **When** the user selects the option to view a chart of upcoming events by city
 
-**Then** the page should display a chart with the number of upcoming events in each city, and the chart should be organized by the city with the highest number of upcoming events displayed first. 
+**Then** the page should display a chart with the number of upcoming events in each city and the chart should be organized by the city with the highest number of upcoming events displayed first. 
