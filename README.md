@@ -2,19 +2,27 @@
 
 Story: As a user, Ishould be able to filter events by city so that Ican see the list ofevents that take place in that city. This feature willallow users to easily find and access the events that are happening in their preferred city. They willnot have to go through a long list ofevents to find the ones that are relevant to them.
 
-**Scenario 1: An event element is collapsed by default Given** that the user has opened the events page **When** the page loads
+**Scenario 1: An event element is collapsed by default**
+
+**Given** that the user has opened the events page 
+
+**When** the page loads
 
 **Then** the event element should be collapsed by default
 
 **Scenario 2: User can expand an event to see its details**
 
-**Given** that the user has opened the events page and the event element is collapsed **When** the user clicks on the event element
+**Given** that the user has opened the events page and the event element is collapsed 
+
+**When** the user clicks on the event element
 
 **Then** the event element should expand to show its details
 
 **Scenario 3: User can collapse an event to hide its details**
 
-**Given** that the user has opened the events page and the event element is expanded **When** the user clicks on the event element
+**Given** that the user has opened the events page and the event element is expanded 
+
+**When** the user clicks on the event element
 
 **Then** the event element should collapse to hide its details
 
@@ -22,7 +30,9 @@ FEATURE 3: SPECIFYNUMBER OF EVENTS
 
 Story: As a user, Iwould like to be able to show/hide event details so that Ican see more/less information about an event.
 
-**Scenario 1: When user hasn’t specified a number, 32 is the default number Given** that the user has opened the events page
+**Scenario 1: When user hasn’t specified a number, 32 is the default number**
+
+**Given** that the user has opened the events page
 
 **When** the user has not specified the number of events to be displayed
 
