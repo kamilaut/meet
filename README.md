@@ -1,6 +1,34 @@
-﻿FEATURE 2: SHOW/HIDE AN EVENT'S DETAILS
+FEATURE 1: FILTER EVENTS BY CITY. 
 
-Story: As a user, Ishould be able to filter events by city so that Ican see the list ofevents that take place in that city. This feature willallow users to easily find and access the events that are happening in their preferred city. They willnot have to go through a long list ofevents to find the ones that are relevant to them.
+Story: As a user, I should be able to “filter events by city” so that I can see the list of events that take place in that city.
+
+**SCENARIO 1: WHEN USER HASN’T SEARCHED FOR A CITY, SHOW UPCOMING EVENTS FROM ALL CITIES.**
+
+**Given** user hasn’t searched for any city
+
+**When** the user opens the app
+
+**Then** the user should see a list of all upcoming events
+
+**SCENARIO 2: USER SHOULD SEE A LIST OF SUGGESTIONS WHEN THEY SEARCH FOR A CITY.**
+
+**Given** the main page is open
+
+**When** user starts typing in the city textbox
+
+**Then** the user should see a list of cities (suggestions) that match what they’ve typed
+
+**SCENARIO 3: USER CAN SELECT A CITY FROM THE SUGGESTED LIST.**
+
+**Given** the user was typing “Berlin” in the city textbox. And the list of suggested cities is showing
+
+**When** the user selects a city (e.g., “Berlin, Germany”) from the list. Then their city should be changed to that city (i.e., “Berlin, Germany”)
+
+**And** the user should receive a list of upcoming events in that city
+
+FEATURE 2: SHOW/HIDE AN EVENT'S DETAILS
+
+Story: As a user, I should be able to filter events by city so that I can see the list ofevents that take place in that city.
 
 **Scenario 1: An event element is collapsed by default**
 
@@ -26,9 +54,9 @@ Story: As a user, Ishould be able to filter events by city so that Ican see the 
 
 **Then** the event element should collapse to hide its details
 
-FEATURE 3: SPECIFYNUMBER OF EVENTS
+FEATURE 3: SPECIFY NUMBER OF EVENTS
 
-Story: As a user, Iwould like to be able to show/hide event details so that Ican see more/less information about an event.
+Story: As a user, I would like to be able to specify the number of events I want to view in the app so that I can see more or fewer events in the events list at once.
 
 **Scenario 1: When user hasn’t specified a number, 32 is the default number**
 
@@ -44,15 +72,15 @@ Story: As a user, Iwould like to be able to show/hide event details so that Ican
 
 **When** the user selects the option to change the number of events displayed
 
-**Then** the page should update to display the selected number of events and the user should be able to see the selected number of events on the page.
+**Then** the page should update to display the selected number of events. And the user should be able to see the selected number of events on the page.
 
 FEATURE 4: USE THE APP WHEN OFFLINE
 
-Story: As a user, Iwould like to be able to use the app when offline so that Ican see the events I viewed the last time Iwas online.
+Story: As a user, I would like to be able to use the app when offline so that I can see the events I viewed the last time I was online.
 
 **Scenario 1: Show cached data when there’s no internet connection**
 
-**Given** that the user has previously loaded the events page and the user's device has no internet connection
+**Given** that the user has previously loaded the events page, and the user's device has no internet connection
 
 **When** the user tries to access the events page
 
@@ -60,20 +88,20 @@ Story: As a user, Iwould like to be able to use the app when offline so that Ica
 
 **Scenario 2: Show error when user changes the settings (city, time range)**
 
-**Given** that the user has opened the events page and the user has selected a specific city and time range
+**Given** that the user has opened the events page 
 
-**When** the user tries to change the city or time range settings
+**When** the user tries to change the city or number of events settings
 
-**Then** the page should display an error message to inform the user that the action is not allowed and the page should not update to show events for the newly selected city and time range.
+**Then** the page should display an error message to inform the user that the action is not allowed, and the page should not update to show events for the newly selected city and time range.
 
-FEATURE 5: DATAVISUALIZATION
+FEATURE 5: DATA VISUALIZATION
 
-Story: As a user, Iwould like to be able to see a chart showing the upcoming events in each city so that Iknow what events are organized in which city.
+Story: As a user, I would like to be able to see a chart showing the upcoming events in each city so that Iknow what events are organized in which city.
 
 **Scenario: Show a chart with the number of upcoming events in each city**
 
-**Given** that the user has opened the events page and there are upcoming events in multiple cities
+**Given** that the user has opened the events page, and there are upcoming events in multiple cities
 
 **When** the user selects the option to view a chart of upcoming events by city
 
-**Then** the page should display a chart with the number of upcoming events in each city and the chart should be organized by the city with the highest number of upcoming events displayed first. The user should be able to view the chart to get an overview of the upcoming events in each city.
+**Then** the page should display a chart with the number of upcoming events in each city, and the chart should be organized by the city with the highest number of upcoming events displayed first. 
