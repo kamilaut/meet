@@ -110,4 +110,4 @@ Story: As a user, I would like to be able to see a chart showing the upcoming ev
 
 **Then** the page should display a chart with the number of upcoming events in each city 
 
-**And** the chart should be organized by the city with the highest number of upcoming events displayed first. 
+**And** the chart should be organized by the city with the highest number of upcoming events displayed first 
