@@ -111,3 +111,23 @@ Story: As a user, I would like to be able to see a chart showing the upcoming ev
 **Then** the page should display a chart with the number of upcoming events in each city 
 
 **And** the chart should be organized by the city with the highest number of upcoming events displayed first 
+
+ *To use serverless functions for this app, I will follow steps below:*
+
+1.Create a new AWS Lambda function: Use the AWS console or command-line interface to create a new AWS Lambda function that will handle the OAuth2 authentication flow for the Google Calendar API. You can choose the Node.js runtime environment, which is suitable for the React application.
+
+2.Implement the OAuth2 flow: Use the Google Calendar API documentation to implement the OAuth2 authentication flow in the Lambda function. Make sure to secure the sensitive credentials such as API key, client ID, and client secret.
+
+3.Configure CORS: Configure the AWS API Gateway (which is used to trigger the Lambda function) to allow cross-origin requests from the React application.
+
+4.Integrate the Lambda function with the React application: Use the React axios library to make API calls to the AWS API Gateway and trigger the Lambda function. Use the async/await syntax to handle asynchronous operations.
+
+5.Implement data visualization: Use the recharts library to implement data visualization for the calendar events.
+
+6.Implement an alert system: Use an OOP approach to create an alert component that can display information to the user.
+
+7.Write tests: Use the TDD technique to write tests for the React components, API calls, and the Lambda function. Make sure to achieve a coverage rate of >= 90%.
+
+8.Optimize for performance: Optimize the React application for performance by following the PWA checklist, implementing a service worker to work offline, and using Lighthouse to monitor performance metrics.
+
+9.Deploy the app: Host the app's code in a Git repository on GitHub and deploy the app to GitHub Pages. Use an online monitoring tool to monitor the app's performance.
