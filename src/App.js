@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
+import NumberOfEvents from './NumberOfEvents';
+
 
 
 class App extends Component {
@@ -10,6 +12,7 @@ class App extends Component {
       <div className="App">
         <CitySearch />
 <EventList />
+<NumberOfEvents />
       </div>
     );
   }

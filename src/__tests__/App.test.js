@@ -19,4 +19,11 @@ describe('<App /> component', () => {
       const AppWrapper = shallow(<App />);
       expect(AppWrapper.find(CitySearch)).toHaveLength(1);
     });
+    test('pass NumberOfEvents state to', () => {
+      const AppWrapper = mount(<App />);
+      const AppNumberOfEventsState = AppWrapper.state('numberOfEvents');
+      expect(AppNumberOfEventsState).not.toEqual(undefined);
+      expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(35);
+      AppWrapper.unmount();
+    });
   });
