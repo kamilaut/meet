@@ -12,7 +12,6 @@ describe('<CitySearch /> component', () => {
     });
   
   test('renders a list of suggestions', () => {
-    const CitySearchWrapper = shallow(<CitySearch />);
     expect(CitySearchWrapper.find('.suggestions')).toHaveLength(1);
   });
   
