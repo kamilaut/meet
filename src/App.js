@@ -13,7 +13,6 @@ class App extends Component {
         <CitySearch />
         <EventList />
         <NumberOfEvents />
-        <Event />
       </div>
     );
   }

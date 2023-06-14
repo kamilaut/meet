@@ -13,8 +13,9 @@ describe('<Event />', () => {
 
   test('expect the default for event details to be showing at first', () => {
     expect(EventWrapper.state('showDetails')).toBe(false);
+    expect(EventWrapper.find('.event-details')).toHaveLength(0);
   });
-
+  
   test('expect that the Event contains elements showing title, location, and date/time', () => {
     expect(EventWrapper.find('.event-title')).toHaveLength(1);
     expect(EventWrapper.find('.event-location')).toHaveLength(1);
@@ -25,6 +26,7 @@ describe('<Event />', () => {
     EventWrapper.setState({ showDetails: true });
     EventWrapper.find('.toggle-details-btn').simulate('click');
     expect(EventWrapper.state('showDetails')).toBe(false);
+    expect(EventWrapper.find('.event-details')).toHaveLength(0);
   });
 
   test('expect the button text to be "Hide Details" when event details are shown', () => {
@@ -36,6 +38,7 @@ describe('<Event />', () => {
     EventWrapper.setState({ showDetails: false });
     EventWrapper.find('.toggle-details-btn').simulate('click');
     expect(EventWrapper.state('showDetails')).toBe(true);
+    expect(EventWrapper.find('.event-details')).toHaveLength(1);
   });
 
   test('expect the button text to be "Show Details" when event details are hidden', () => {
