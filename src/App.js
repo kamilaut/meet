@@ -13,20 +13,21 @@ class App extends Component {
   
   state = {
     events: [],
-    locations: []
+    locations: [],
+    numberOfEvents: 32 // setting the deafault value for number of events
   }
   
   componentDidMount() {
-    this.mounted = true;
+    this._isMounted = true;
     getEvents().then((events) => {
-      if (this.mounted) {
+      if (this._isMounted) {
         this.setState({ events, locations: extractLocations(events) });
       }
     });
   }
 
   componentWillUnmount(){
-    this.mounted = false;
+    this._isMounted = false;
   }
   
   updateEvents = (location, eventCount) => {
@@ -51,7 +52,9 @@ class App extends Component {
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <EventList events={this.state.events} />
-        <NumberOfEvents />
+        <NumberOfEvents 
+        updateEvents ={this.updateEvents}
+        />
       </div>
     );
   }

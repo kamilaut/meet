@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 
 class NumberOfEvents extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      numberOfEvents: 32, // Default value of the input field
-    };
-  }
+ state = {
+ numberOfEvents: this.props.numberOfEvents || 32, // setting the default value for numberOfEvents
+}
+
+handleInputChanged = (event) => {
+  const value = event.target.value;
+  this.setState ({ numberOfEvents: value});
+  this.props.updateEvents(null, value); // calling updateEvents with location =null and eventCount=value
+}
+  
 
   render() {
     return (
@@ -15,7 +19,7 @@ class NumberOfEvents extends Component {
           className="number-of-events-input"
           type="number"
           value={this.state.numberOfEvents}
-          onChange={(e) => this.setState({ numberOfEvents: e.target.value })}
+          onChange={this.handleInputChanged}
         />
       </div>
     );
