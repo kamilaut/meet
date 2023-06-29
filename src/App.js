@@ -9,13 +9,14 @@ import './nprogress.css';
 
 class App extends Component {
   _isMounted = false;
-  
+
   state = {
     events: [],
     locations: [],
-    numberOfEvents: 32 // setting the deafault value for number of events
-  }
-  
+    numberOfEvents: 32, // setting the default value for the number of events
+    currentLocation: 'all', // setting the default value for the current location
+  };
+
   componentDidMount() {
     this._isMounted = true;
     getEvents().then((events) => {
@@ -25,34 +26,38 @@ class App extends Component {
     });
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this._isMounted = false;
   }
-  
+
   updateEvents = (location, eventCount) => {
     const locationFilter = location || this.state.currentLocation;
     const numberOfEventsFilter = eventCount || this.state.numberOfEvents;
+
     getEvents().then((events) => {
       let locationEvents = events;
 
-      if (locationFilter !== "all") {
-        locationEvents = events.filter((event) => event.location === location)
+      if (locationFilter !== 'all') {
+        locationEvents = events.filter((event) => event.location === locationFilter);
       }
+
       const filteredEvents = locationEvents.slice(0, numberOfEventsFilter);
 
       this.setState({
         events: filteredEvents,
+        currentLocation: locationFilter, // Update the current location in the state
+        numberOfEvents: numberOfEventsFilter,
       });
     });
-  }
-  
+  };
+
   render() {
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <NumberOfEvents
           updateEvents={this.updateEvents}
-          numberOfEvents={this.state.NumberOfEvents}
+          numberOfEvents={this.state.numberOfEvents}
         />
         <EventList events={this.state.events} />
       </div>
