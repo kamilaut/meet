@@ -43,6 +43,7 @@ defineFeature(feature, (test) => {
   
     then('the user should receive a list of cities (suggestions) that match what they’ve typed', () => {
       const suggestions = CitySearchWrapper.find('.suggestions li');
+      // eslint-disable-next-line testing-library/no-debugging-utils
       console.log('Received Suggestions:', suggestions.debug());
       expect(suggestions).toHaveLength(2);
     });
