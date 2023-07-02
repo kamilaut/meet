@@ -8,7 +8,6 @@ describe('show/hide event details', () => {
     browser = await puppeteer.launch({
       headless: false,
       slowMo: 250,
-      timeout: 10000, 
     });
     page = await browser.newPage();
     await page.goto('http://localhost:3000/');
@@ -20,7 +19,7 @@ describe('show/hide event details', () => {
   });
 
   test('An event element is collapsed by default', async () => {
-    const eventDetails = await page.$('.event .details');
+    const eventDetails = await page.$('.event-details');
     expect(eventDetails).toBeNull();
   });
 
@@ -28,14 +27,14 @@ describe('show/hide event details', () => {
     await page.waitForSelector('.event');
     await page.click('.toggle-details-btn');
 
-    const eventDetails = await page.$('.event .details');
+    const eventDetails = await page.$('.event-details');
     expect(eventDetails).toBeDefined();
   });
 
   test('User can collapse an event to hide details', async () => {
     await page.click('.toggle-details-btn');
     await page.waitForTimeout(500);
-    const eventDetails = await page.$('.event .details');
+    const eventDetails = await page.$('.event-details');
     expect(eventDetails).toBeNull();
   });
 });

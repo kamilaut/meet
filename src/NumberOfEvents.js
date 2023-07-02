@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
 class NumberOfEvents extends Component {
- state = {
- numberOfEvents: this.props.numberOfEvents || 32, // setting the default value for numberOfEvents
-}
+  state = {
+    numberOfEvents: this.props.numberOfEvents || 32,
+  };
 
-handleInputChanged = (event) => {
-  const value = event.target.value;
-  this.setState ({ numberOfEvents: value});
-  this.props.updateEvents(null, value); // calling updateEvents with location =null and eventCount=value
-}
-  
+  handleInputChanged = (event) => {
+    const value = event.target.value;
+    this.setState({ numberOfEvents: value });
+    this.props.updateEvents(null, value);
+  };
 
   render() {
     return (

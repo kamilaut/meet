@@ -33,23 +33,23 @@ class App extends Component {
   updateEvents = (location, eventCount) => {
     const locationFilter = location || this.state.currentLocation;
     const numberOfEventsFilter = eventCount || this.state.numberOfEvents;
-
+  
     getEvents().then((events) => {
       let locationEvents = events;
-
+  
       if (locationFilter !== 'all') {
         locationEvents = events.filter((event) => event.location === locationFilter);
       }
-
+  
       const filteredEvents = locationEvents.slice(0, numberOfEventsFilter);
-
+  
       this.setState({
         events: filteredEvents,
-        currentLocation: locationFilter, // Update the current location in the state
+        currentLocation: locationFilter,
         numberOfEvents: numberOfEventsFilter,
       });
     });
-  };
+  };  
 
   render() {
     return (
