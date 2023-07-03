@@ -21,7 +21,8 @@ class App extends Component {
     this._isMounted = true;
     getEvents().then((events) => {
       if (this._isMounted) {
-        this.setState({ events, locations: extractLocations(events) });
+        const filteredEvents = events.slice(0, 32); // limiting the initial events to 32
+        this.setState({ events: filteredEvents, locations: extractLocations(events) });
       }
     });
   }
@@ -35,13 +36,13 @@ class App extends Component {
     const numberOfEventsFilter = eventCount || this.state.numberOfEvents;
   
     getEvents().then((events) => {
-      let locationEvents = events;
+      let filteredEvents = events;
   
       if (locationFilter !== 'all') {
-        locationEvents = events.filter((event) => event.location === locationFilter);
+        filteredEvents = events.filter((event) => event.location === locationFilter);
       }
   
-      const filteredEvents = locationEvents.slice(0, numberOfEventsFilter);
+      filteredEvents = filteredEvents.slice(0, numberOfEventsFilter);
   
       this.setState({
         events: filteredEvents,
