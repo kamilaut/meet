@@ -3,7 +3,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import App from '../App';
 import CitySearch from '../CitySearch';
-import { mockData } from '../mock-data';
 
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
@@ -66,10 +65,9 @@ defineFeature(feature, (test) => {
       expect(CitySearchWrapper.state('query')).toBe("Berlin"); 
     });
     
-
     then('the user should receive a list of upcoming events in that city', () => {
-      AppWrapper.update();
-      expect(AppWrapper.find('.event')).toHaveLength(mockData.length); 
+     let eventLocations = AppWrapper.find (".event").find(".event-location").map(locationElement => locationElement.innerText);
+     expect (eventLocations.filter(location => location !== "Berlin, Germany")).toHaveLength(0); 
     });
   });
 });
