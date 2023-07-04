@@ -70,9 +70,10 @@ defineFeature(feature, (test) => {
       expect(CitySearchWrapper.state('query')).toBe('Berlin, Germany');
     });
     
-    then('the user should receive a list of upcoming events in that city', () => {
-     let eventLocations = AppWrapper.find (".event").find(".event-location").map(locationElement => locationElement.text());
-     expect (eventLocations.filter(location => location !== "Berlin, Germany")).toHaveLength(16); 
+    then('the user should receive a list of upcoming events in that city', async () => {
+      await AppWrapper.update();
+      let eventLocations = AppWrapper.find(".event").find(".event-location").map(locationElement => locationElement.text());
+      expect(eventLocations.filter(location => location !== "Berlin, Germany")).toHaveLength(0);
     });
   });
 });
