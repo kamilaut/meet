@@ -1,4 +1,5 @@
 const { google } = require("googleapis");
+// eslint-disable-next-line no-unused-vars
 const OAuth2 = google.auth.OAuth2;
 const calendar = google.calendar("v3");
 /**
@@ -139,7 +140,8 @@ module.exports.getCalendarEvents = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+      "Access-Control-Allow-Credentials": true
     },
     body: JSON.stringify({ events: results.data.items }),
   };
@@ -149,6 +151,7 @@ module.exports.getCalendarEvents = async (event) => {
     statusCode: 500,
     headers: {
       "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true
     },
     body: JSON.stringify(error),
   };
