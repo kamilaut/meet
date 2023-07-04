@@ -66,7 +66,7 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url = 'https://c3oc9mae86.execute-api.eu-central-1.amazonaws.com/dev/api/get-events/' + '/' + token;
+    const url = 'https://c3oc9mae86.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
     const result = await axios.get(url);
     if (result.data) {
       const locations = extractLocations(result.data.events);
@@ -96,7 +96,7 @@ const getToken = async (code) => {
   try {
     const encodeCode = encodeURIComponent(code);
     const response = await fetch(
-      'https://c3oc9mae86.execute-api.eu-central-1.amazonaws.com/dev/api/token/' + '/' + encodeCode
+      'https://c3oc9mae86.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
