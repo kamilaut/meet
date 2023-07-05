@@ -11,9 +11,7 @@ import axios from 'axios';
  * It will also remove all duplicates by creating another new array using the spread operator and spreading a Set.
  * The Set will remove all duplicates from the array.
  */
-const accessToken = localStorage.getItem('access_token');
-
-const tokenCheck = async () => {
+const tokenCheck = async (accessToken) => {
   if (accessToken) {
     try {
       const result = await fetch(
@@ -26,10 +24,11 @@ const tokenCheck = async () => {
   }
   return null;
 };
-  
+
 
 const getAccessToken = async () => {
-  const tokenCheckResult = await tokenCheck();
+  const accessToken = localStorage.getItem('access_token');
+  const tokenCheckResult = await tokenCheck(accessToken);
 
   if (!accessToken || (tokenCheckResult && tokenCheckResult.error)) {
     localStorage.removeItem("access_token");
