@@ -32,25 +32,25 @@ class App extends Component {
   }
 
   updateEvents = (location, eventCount) => {
-    const locationFilter = location || this.state.currentLocation;
-    const numberOfEventsFilter = eventCount || this.state.numberOfEvents;
-  
+    const locationFilter = location ? location : this.state.currentLocation;
+    const numberOfEventsFilter = eventCount ? eventCount : this.state.numberOfEvents;
+
     getEvents().then((events) => {
       let filteredEvents = events;
-  
+
       if (locationFilter !== 'all') {
         filteredEvents = events.filter((event) => event.location === locationFilter);
       }
-  
+
       filteredEvents = filteredEvents.slice(0, numberOfEventsFilter);
-  
+
       this.setState({
         events: filteredEvents,
         currentLocation: locationFilter,
         numberOfEvents: numberOfEventsFilter,
       });
     });
-  };  
+  };
 
   render() {
     return (
