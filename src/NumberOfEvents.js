@@ -7,9 +7,16 @@ class NumberOfEvents extends Component {
 
   handleInputChanged = (event) => {
     const value = event.target.value;
-    this.setState({ numberOfEvents: value });
-    this.props.updateEvents(undefined, value);
+  
+    if (value <= 0 || isNaN(value)) {
+      this.props.setErrorAlert('Please enter a valid number of events.');
+    } else {
+      this.props.setErrorAlert('');
+      this.setState({ numberOfEvents: value });
+      this.props.updateEvents(undefined, value);
+    }
   };
+  
 
   render() {
     return (
