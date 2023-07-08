@@ -4,75 +4,59 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
-import { InfoAlert, ErrorAlert } from './Alert';
+import { InfoAlert } from './Alert';
 
 class App extends Component {
-  _isMounted = false;
-
   state = {
     events: [],
     locations: [],
     numberOfEvents: 32,
     currentLocation: 'all',
-    infoAlert: '',
-    errorAlert: '',
+    infoText: '',
   };
 
   componentDidMount() {
-    this._isMounted = true;
+    this.mounted = true;
     getEvents().then((events) => {
-      if (this._isMounted) {
-        const filteredEvents = events.slice(0, 32);
-        this.setState({ events: filteredEvents, locations: extractLocations(events) });
+      if (this.mounted) {
+        this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events) });
       }
     });
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this.mounted = false;
   }
 
   updateEvents = (location, eventCount) => {
-    const locationFilter = location ? location : this.state.currentLocation;
-    const numberOfEventsFilter = eventCount ? eventCount : this.state.numberOfEvents;
-  
+    const numberOfEvents = eventCount || this.state.numberOfEvents;
+    this.setState({ infoText: '' });
+
     getEvents().then((events) => {
       let filteredEvents = events;
-  
-      if (locationFilter !== 'all') {
-        filteredEvents = events.filter((event) => event.location === locationFilter);
+      if (location && location !== 'all') {
+        filteredEvents = events.filter((event) => event.location === location);
       }
-  
-      filteredEvents = filteredEvents.slice(0, numberOfEventsFilter);
-  
       this.setState({
-        events: filteredEvents,
-        currentLocation: locationFilter,
-        numberOfEvents: numberOfEventsFilter,
-        errorAlert: '', // Clear the error alert when updating events
+        events: filteredEvents.slice(0, numberOfEvents),
+        currentLocation: location || 'all',
+        numberOfEvents,
       });
+
+      if (filteredEvents.length === 0) {
+        this.setState({
+          infoText: 'No events found for the selected location.',
+        });
+      }
     });
   };
-  
 
   render() {
     return (
       <div className="App">
-        <div className="alerts-container">
-          {this.state.infoAlert && <InfoAlert text={this.state.infoAlert} />}
-          {this.state.errorAlert && <ErrorAlert text={this.state.errorAlert} />}
-        </div>
-        <CitySearch
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-          setInfoAlert={(message) => this.setState({ infoAlert: message })}
-          setErrorAlert={(message) => this.setState({ errorAlert: message })}
-        />
-        <NumberOfEvents
-          updateEvents={this.updateEvents}
-          numberOfEvents={this.state.numberOfEvents}
-          setErrorAlert={(message) => this.setState({ errorAlert: message })}
-        />
+        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
+        <InfoAlert text={this.state.infoText} />
         <EventList events={this.state.events} />
       </div>
     );
