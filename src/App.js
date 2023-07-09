@@ -1,69 +1,64 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
-import { InfoAlert } from './Alert';
+import { InfoAlert, WarningAlert } from './Alert';
 
-class App extends Component {
-  state = {
-    events: [],
-    locations: [],
-    numberOfEvents: 32,
-    currentLocation: 'all',
-    infoText: '',
+const App = () => {
+  const [events, setEvents] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [numberOfEvents, setNumberOfEvents] = useState(32);
+  const [currentLocation, setCurrentLocation] = useState('all');
+  const [infoText, setInfoText] = useState('');
+  const [warningAlertMessage, setWarningAlertMessage] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const events = await getEvents();
+      if (events) {
+        const filteredEvents = currentLocation === 'all' ? events : events.filter((event) => event.location === currentLocation);
+        setEvents(filteredEvents.slice(0, numberOfEvents));
+        setLocations(extractLocations(events));
+        if (filteredEvents.length === 0) {
+          setInfoText('No events found for the selected location.');
+        } else {
+          setInfoText('');
+        }
+      } else {
+        setEvents([]);
+        setLocations([]);
+        setInfoText('Failed to fetch events. Please try again later.');
+      }
+    };
+
+    if (navigator.onLine) {
+      setWarningAlertMessage('');
+      fetchData();
+    } else {
+      setWarningAlertMessage('You are currently offline. The event data may not be up to date.');
+    }
+  }, [currentLocation, numberOfEvents]);
+
+  const updateEvents = (location, eventCount) => {
+    setInfoText('');
+    setCurrentLocation(location || 'all');
+    setNumberOfEvents(eventCount || numberOfEvents);
   };
 
-  componentDidMount() {
-    this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events) });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  updateEvents = (location, eventCount) => {
-    const numberOfEvents = eventCount || this.state.numberOfEvents;
-    this.setState({ infoText: '' });
-
-    getEvents().then((events) => {
-      let filteredEvents = events;
-      if (location && location !== 'all') {
-        filteredEvents = events.filter((event) => event.location === location);
-      }
-      this.setState({
-        events: filteredEvents.slice(0, numberOfEvents),
-        currentLocation: location || 'all',
-        numberOfEvents,
-      });
-
-      if (filteredEvents.length === 0) {
-        this.setState({
-          infoText: 'No events found for the selected location.',
-        });
-      }
-    });
-  };
-
-  render() {
-    const { infoText } = this.state;
-    return (
-      <div className="App">
-        <h1 className="header">MEET APP</h1>
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <p className="number-of-events-label">Number of Events</p>
-        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
-        {infoText.length !== 0 && <InfoAlert text={infoText} />}
-        <EventList events={this.state.events} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <h1 className="header">MEET APP</h1>
+      <CitySearch locations={locations} updateEvents={updateEvents} />
+      <p className="number-of-events-label">Number of Events</p>
+      <NumberOfEvents numberOfEvents={numberOfEvents} updateEvents={updateEvents} />
+      {infoText.length !== 0 && <InfoAlert text={infoText} />}
+      {warningAlertMessage.length !== 0 && <WarningAlert text={warningAlertMessage} />}
+      <EventList events={events} />
+    </div>
+  );
+};
 
 export default App;
+

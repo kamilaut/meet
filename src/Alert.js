@@ -42,4 +42,10 @@ class ErrorAlert extends Alert {
   bgColor = 'rgb(255, 220, 220)'; // light red
 }
 
-export { InfoAlert, ErrorAlert };
+class WarningAlert extends Alert {
+  color = 'rgb(255, 165, 0)'; // orange
+  bgColor = 'rgb(255, 235, 204)'; // light orange
+}
+
+export { InfoAlert, ErrorAlert, WarningAlert };
+
