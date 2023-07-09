@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { InfoAlert, ErrorAlert } from './Alert';
 
 class CitySearch extends Component {
   state = {
     query: '',
     suggestions: [],
     showSuggestions: undefined,
+    infoText: '',
+    errorText: '',
   };
 
   handleInputChanged = (event) => {
@@ -13,9 +16,17 @@ class CitySearch extends Component {
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
+
+    let infoText = '';
+    if (suggestions.length === 0) {
+      infoText = "We cannot find the city you are looking for. Please try another city.";
+    }
+
     this.setState({
       query: value,
       suggestions,
+      infoText,
+      errorText: '',
     });
   };
 
@@ -24,11 +35,15 @@ class CitySearch extends Component {
       this.setState({
         query: '',
         showSuggestions: false,
+        infoText: '',
+        errorText: '',
       });
     } else {
       this.setState({
         query: suggestion,
         showSuggestions: false,
+        infoText: '',
+        errorText: '',
       });
       this.props.updateEvents(suggestion, undefined);
     }
@@ -47,13 +62,6 @@ class CitySearch extends Component {
             this.setState({ showSuggestions: true });
           }}
         />
-        <span>Enter number of events: </span>
-        <input
-          type="number"
-          className="number-of-events"
-          value={this.state.numberOfEvents}
-          onChange={this.handleNumberOfEventsChanged}
-        />
         <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: 'none' }}>
           {this.state.suggestions.map((suggestion) => (
             <li key={suggestion} onClick={() => this.handleItemClicked(suggestion)}>
@@ -64,9 +72,15 @@ class CitySearch extends Component {
             <b>See all cities</b>
           </li>
         </ul>
+        <div className="alerts-container">
+          {this.state.infoText.length ? <InfoAlert text={this.state.infoText} /> : null}
+          {this.state.errorText.length ? <ErrorAlert text={this.state.errorText} /> : null}
+        </div>
       </div>
     );
   }
 }
 
 export default CitySearch;
+
+
