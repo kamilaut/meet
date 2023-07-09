@@ -52,7 +52,7 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="CitySearch">
-        <span>Enter city: </span>
+        <span>Enter a city: </span>
         <input
           type="text"
           className="city"
