@@ -52,11 +52,12 @@ class App extends Component {
   };
 
   render() {
+    const { infoText } = this.state;
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
-        <InfoAlert text={this.state.infoText} />
+        {infoText.length !== 0 && <InfoAlert text={infoText} />}
         <EventList events={this.state.events} />
       </div>
     );
