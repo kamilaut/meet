@@ -25,7 +25,6 @@ const tokenCheck = async (accessToken) => {
   return null;
 };
 
-
 const getAccessToken = async () => {
   const accessToken = localStorage.getItem('access_token');
   const tokenCheckResult = await tokenCheck(accessToken);
@@ -61,19 +60,24 @@ export const getEvents = async () => {
     return mockData;
   }
 
+  if (!navigator.onLine) {
+    const events = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return events ? JSON.parse(events) : [];
+  }
+
   const token = await getAccessToken();
 
   if (token) {
     removeQuery();
     const url = 'https://c3oc9mae86.execute-api.eu-central-1.amazonaws.com/dev/api/get-events' + '/' + token;
-    const result = await axios.get(url);
-    if (result.data) {
-      const locations = extractLocations(result.data.events);
-      localStorage.setItem("lastEvents", JSON.stringify(result.data));
-      localStorage.setItem("locations", JSON.stringify(locations));
-    }
-    NProgress.done();
-    return result.data.events;
+    const response = await fetch(url);
+    const result = await response.json();
+    if (result) {
+      NProgress.done();
+      localStorage.setItem("lastEvents", JSON.stringify(result.events));
+      return result.events;
+    } else return null;
   }
 };
 
@@ -107,3 +111,4 @@ const getToken = async (code) => {
     return error;
   }
 };
+
