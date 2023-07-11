@@ -76,7 +76,7 @@ class App extends Component {
       <div className="App">
         <h1 className="header">MEET APP</h1>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <p className="number-of-events-label">Number of Events</p>
+        <p className="number-of-events-label">Number of Events:</p>
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
         {infoText.length !== 0 && <InfoAlert text={infoText} />}
         {warningAlertMessage && <WarningAlert text={warningAlertMessage} />}
