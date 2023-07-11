@@ -45,8 +45,8 @@ class CitySearch extends Component {
         infoText: '',
         errorText: '',
       });
-      this.props.updateEvents(suggestion, undefined);
     }
+    this.props.updateEvents(suggestion, undefined);
   };
 
   render() {

@@ -49,6 +49,8 @@ class App extends Component {
     const numberOfEvents = eventCount || this.state.numberOfEvents;
     this.setState({ infoText: '' });
 
+    this.checkOnlineStatus();
+
     getEvents().then((events) => {
       let filteredEvents = events;
       if (location && location !== 'all') {
