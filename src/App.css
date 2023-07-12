@@ -154,6 +154,14 @@ input[type="number"] {
   gap: 20px;
 }
 
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  flex-wrap: wrap;
+  
+}
+
 .login-button {
   color: #fff;
   text-transform: uppercase;
@@ -222,9 +230,5 @@ input[type="number"] {
     max-width: 500px;
     min-width: 400px;
     margin: 0 auto;
-  }
-
-  .charts-container {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
