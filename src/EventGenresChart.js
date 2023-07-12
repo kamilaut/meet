@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   PieChart,
   Pie,
-  Legend,
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
@@ -11,22 +10,15 @@ const EventGenresChart = ({ events }) => {
   const [data, setData] = useState([]);
 
   const getData = useCallback(() => {
-    const genreCounts = {};
+    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
 
-    events.forEach((event) => {
-      const { genre } = event;
-
-      if (genreCounts[genre]) {
-        genreCounts[genre] += 1;
-      } else {
-        genreCounts[genre] = 1;
-      }
+    const chartData = genres.map((genre) => {
+      const filteredEvents = events.filter((event) => event.summary.includes(genre));
+      return {
+        name: genre,
+        value: filteredEvents.length,
+      };
     });
-
-    const chartData = Object.keys(genreCounts).map((genre) => ({
-      name: genre,
-      value: genreCounts[genre],
-    }));
 
     return chartData;
   }, [events]);
@@ -36,20 +28,44 @@ const EventGenresChart = ({ events }) => {
     setData(chartData);
   }, [getData]);
 
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    outerRadius,
+    percent,
+    index,
+  }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = outerRadius;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN) * 1.07;
+    const y = cy + radius * Math.sin(-midAngle * RADIAN) * 1.07;
+    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
+    return percent ? (
+      <text
+        x={x}
+        y={y}
+        fill="#8884d8"
+        textAnchor={x > cx ? 'start' : 'end'}
+        dominantBaseline="central"
+      >
+        {`${genres[index]} ${(percent * 100).toFixed(0)}%`}
+      </text>
+    ) : null;
+  };
+
   return (
     <ResponsiveContainer width="99%" height={400}>
       <PieChart>
         <Pie
           data={data}
           dataKey="value"
-          nameKey="name"
-          cx="50%"
-          cy="50%"
-          outerRadius={80}
           fill="#8884d8"
+          labelLine={false}
+          label={renderCustomizedLabel}
+          outerRadius={150}
         />
         <Tooltip />
-        <Legend />
       </PieChart>
     </ResponsiveContainer>
   );
