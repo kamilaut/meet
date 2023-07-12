@@ -5,6 +5,8 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
 import { InfoAlert, WarningAlert } from './Alert';
+import CityEventsChart from './CityEventsChart';
+import EventGenresChart from './EventGenresChart';
 
 class App extends Component {
   state = {
@@ -71,7 +73,7 @@ class App extends Component {
   };
 
   render() {
-    const { infoText, warningAlertMessage } = this.state;
+    const { infoText, warningAlertMessage, events } = this.state;
     return (
       <div className="App">
         <h1 className="header">MEET APP</h1>
@@ -80,7 +82,11 @@ class App extends Component {
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} />
         {infoText.length !== 0 && <InfoAlert text={infoText} />}
         {warningAlertMessage && <WarningAlert text={warningAlertMessage} />}
-        <EventList events={this.state.events} />
+        <div className="charts-container">
+          <CityEventsChart allLocations={this.state.locations} events={events} />
+          <EventGenresChart events={events} />
+        </div>
+        <EventList events={events} />
       </div>
     );
   }

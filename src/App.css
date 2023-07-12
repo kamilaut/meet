@@ -1,43 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:500');
+:root {
+  --primary-color: rgb(46, 113, 175);
+  --secondary-color: rgb(132, 166, 198);
+  --tertiary-color: rgb(197, 205, 208);
+  --quaternary-color: rgb(222, 230, 235);
+  --accent-color: rgb(255, 190, 130);
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
 .App {
   text-align: center;
   padding: 2% 5%;
 }
 
-.App * {
-  box-sizing: border-box;
-}
-
 ul {
   padding: 0;
   list-style: none;
-}
-
-p {
-  margin: 5px 0;
-}
-
-.display-none {
-  display: none;
-}
-
-.showSuggestions {
-  display: block;
-}
-
-input[type="text"],
-input[type="number"] {
-  padding: 8px 6px 8px 10px;
-  border-radius: 4px;
-  outline: none;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  line-height: 20px;
-  align-self: center;
-  height: 38px;
-  width: 100%;
-  max-width: 250px;
 }
 
 .CitySearch {
@@ -53,67 +35,85 @@ input[type="number"] {
   width: 100%;
   position: absolute;
   z-index: 2;
-  align-self: center;
+  align-self: flex-start;
   margin: 0;
-  top: 43px;
+  top: calc(100% + 5px);
+  left: 0;
   font-size: 14px;
-  box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--secondary-color);
+  border-radius: 4px;
 }
 
 .suggestions > li {
-  text-align: left;
-  padding: 8px 6px 8px 10px;
-  background-color: #eee;
-  cursor: default;
-}
-
-.suggestions > li:last-child {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: var(--tertiary-color);
 }
 
 .suggestions > li:hover {
-  background-color: #bcdcdb;
+  background-color: var(--quaternary-color);
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 8px 12px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  line-height: 20px;
+  height: 38px;
+  width: 100%;
+  max-width: 250px;
 }
 
 .event {
-  padding: 10px 10px 35px;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
   text-align: left;
   border: 1px solid #ccc;
   border-radius: 4px;
-  position: relative;
-}
-
-.details-btn {
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  padding: 5px 8px;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-  font-size: 16px;
-  font-style: italic;
+  background-color: var(--tertiary-color);
 }
 
 .name {
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--primary-color);
 }
 
 .group-name {
   text-transform: uppercase;
   font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--quaternary-color);
 }
 
-.going,
-.visibility {
+.details-btn {
+  padding: 8px 12px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
   font-style: italic;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.details-btn:hover {
+  background-color: #574aab;
 }
 
 .description {
-  overflow-x: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .numberOfEvents {
@@ -125,10 +125,9 @@ input[type="number"] {
 
 .button-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   padding: 20px;
-  font-family: sans-serif;
 }
 
 .Alert {
@@ -139,73 +138,68 @@ input[type="number"] {
 .data-vis-wrapper {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .data-vis-wrapper .recharts-responsive-container {
-  min-width: 100%;
-  display: flex;
+  width: 100%;
+  height: 400px;
 }
 
-.recharts-surface {
-  overflow: visible;
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 .login-button {
-  color: #494949;
+  color: #fff;
   text-transform: uppercase;
   text-decoration: none;
-  background: #ffffff;
+  background-color: var(--primary-color);
   padding: 20px;
-  border: 4px solid #494949;
+  border-radius: 4px;
   display: inline-block;
-  transition: all 0.4s ease 0s;
-  min-width: 10rem;
-  margin: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #574aab;
 }
 
 .google-btn {
   width: 184px;
   height: 42px;
-  margin: 1rem;
   background-color: #4285f4;
   border-radius: 2px;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: box-shadow 0.3s ease;
 }
 
 .google-btn:hover {
   box-shadow: 0 0 6px #4285f4;
 }
 
-.google-btn:active {
-  background: #1669f2;
-}
-
 .google-icon-wrapper {
-  position: absolute;
-  margin-top: 1px;
-  margin-left: 1px;
-  width: 40px;
-  height: 40px;
-  border-radius: 2px;
-  background-color: #fff;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
 }
 
 .google-icon {
-  position: absolute;
-  margin-top: 11px;
-  margin-left: -8px;
-  width: 18px;
-  height: 18px;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-text {
-  float: right;
-  margin: 11px 11px 0 0;
   color: #fff;
   font-size: 14px;
-  letter-spacing: 0.2px;
-  font-family: "Roboto", sans-serif;
 }
 
 @media only screen and (min-width: 768px) {
@@ -219,19 +213,18 @@ input[type="number"] {
   .CitySearch input[type="number"] {
     margin-right: 10px;
   }
-  
+
   .button-wrapper {
     grid-template-columns: 1fr;
   }
 
-  .data-vis-wrapper {
-    flex-direction: row;
+  .data-vis-wrapper .recharts-responsive-container {
+    max-width: 500px;
+    min-width: 400px;
+    margin: 0 auto;
   }
 
-  .data-vis-wrapper .recharts-responsive-container {
-    flex-basis: 50%;
-    max-width: 50%;
-    min-width: auto;
-    margin: 0 auto;
+  .charts-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
