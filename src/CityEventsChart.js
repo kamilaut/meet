@@ -5,8 +5,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
-  ResponsiveContainer
+  Tooltip
 } from 'recharts';
 
 const CityEventsChart = ({ allLocations, events }) => {
@@ -27,17 +26,18 @@ const CityEventsChart = ({ allLocations, events }) => {
   }, [getData]);
 
   return (
-    <ResponsiveContainer width="99%" height={400}>
+    <div className="data-vis-wrapper">
       <ScatterChart
+        width={800}
+        height={400}
         margin={{
           top: 20,
           right: 20,
           bottom: 60,
-          left: -30,
+          left: -30
         }}
       >
-        <CartesianGrid />
-        <YAxis type="number" dataKey="count" name="Number of events" allowDecimals={false} />
+        <CartesianGrid stroke="var(--tertiary-color)" />
         <XAxis
           type="category"
           dataKey="city"
@@ -45,11 +45,19 @@ const CityEventsChart = ({ allLocations, events }) => {
           angle={60}
           interval={0}
           tick={{ dx: 20, dy: 40, fontSize: 14 }}
+          stroke="var(--tertiary-color)"
+        />
+        <YAxis
+          type="number"
+          dataKey="count"
+          name="Number of events"
+          allowDecimals={false}
+          stroke="var(--tertiary-color)"
         />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        <Scatter name="A school" data={data} fill="#8884d8" />
+        <Scatter data={data} fill="var(--chart-color-1)" />
       </ScatterChart>
-    </ResponsiveContainer>
+    </div>
   );
 };
 

@@ -1,10 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  PieChart,
-  Pie,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
+import { PieChart, Pie, Tooltip } from 'recharts';
 
 const EventGenresChart = ({ events }) => {
   const [data, setData] = useState([]);
@@ -16,7 +11,7 @@ const EventGenresChart = ({ events }) => {
       const filteredEvents = events.filter((event) => event.summary.includes(genre));
       return {
         name: genre,
-        value: filteredEvents.length,
+        value: filteredEvents.length
       };
     });
 
@@ -34,7 +29,7 @@ const EventGenresChart = ({ events }) => {
     midAngle,
     outerRadius,
     percent,
-    index,
+    index
   }) => {
     const RADIAN = Math.PI / 180;
     const radius = outerRadius;
@@ -55,19 +50,19 @@ const EventGenresChart = ({ events }) => {
   };
 
   return (
-    <ResponsiveContainer width="99%" height={400}>
-      <PieChart>
+    <div className="data-vis-wrapper">
+      <PieChart width={400} height={400}>
         <Pie
           data={data}
           dataKey="value"
-          fill="#8884d8"
+          fill="var(--chart-color-2)"
           labelLine={false}
           label={renderCustomizedLabel}
           outerRadius={150}
         />
         <Tooltip />
       </PieChart>
-    </ResponsiveContainer>
+    </div>
   );
 };
 

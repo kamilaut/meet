@@ -4,6 +4,8 @@
   --tertiary-color: rgb(197, 205, 208);
   --quaternary-color: rgb(222, 230, 235);
   --accent-color: rgb(255, 190, 130);
+  --chart-color-1: var(--primary-color); /* Reusing primary color */
+  --chart-color-2: var(--secondary-color); /* Reusing secondary color */
 }
 
 body {
@@ -152,6 +154,57 @@ input[type="number"] {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-surface {
+  background-color: var(--quaternary-color);
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-cartesian-grid-horizontal line {
+  stroke: var(--tertiary-color);
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-cartesian-grid-vertical line {
+  stroke: var(--tertiary-color);
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-legend-item-text {
+  fill: var(--tertiary-color);
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-legend-item-active .recharts-legend-item-text {
+  fill: var(--primary-color);
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-tooltip {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--tertiary-color);
+  color: var(--primary-color);
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-tooltip-label {
+  color: var(--primary-color);
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-tooltip-item-name {
+  color: var(--quaternary-color);
+}
+
+.data-vis-wrapper .recharts-responsive-container .recharts-tooltip-item-value {
+  color: var(--primary-color);
+}
+
+.CityEventsChart .recharts-scatter-dot,
+.EventGenresChart .recharts-pie-sector {
+  fill: var(--chart-color-1);
+}
+
+.EventGenresChart .recharts-pie-label-text {
+  fill: var(--primary-color);
+}
+
+.EventGenresChart .recharts-tooltip-label {
+  color: var(--primary-color);
 }
 
 .login-button {
