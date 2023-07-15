@@ -35,12 +35,12 @@ const EventGenresChart = ({ events }) => {
     const radius = outerRadius;
     const x = cx + radius * Math.cos(-midAngle * RADIAN) * 1.07;
     const y = cy + radius * Math.sin(-midAngle * RADIAN) * 1.07;
-    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
+    const genres = ['React', 'JS', 'Node', 'jQuery', 'Angular'];
     return percent ? (
       <text
         x={x}
         y={y}
-        fill="#8884d8"
+        fontSize="12px"
         textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
       >
@@ -58,7 +58,7 @@ const EventGenresChart = ({ events }) => {
           fill="var(--chart-color-2)"
           labelLine={false}
           label={renderCustomizedLabel}
-          outerRadius={150}
+          outerRadius={100}
         />
         <Tooltip />
       </PieChart>
