@@ -92,6 +92,10 @@ input[type="number"] {
   transition: background-color 0.3s ease;
 }
 
+.details-btn:hover {
+  background-color: #ffae67; /* Updated hover color */
+}
+
 .description {
   overflow: hidden;
   text-overflow: ellipsis;
