@@ -5,7 +5,7 @@ A serverless, progressive web application (PWA) using React and a test-driven de
 
 [![HLU79zQ.md.jpg](https://iili.io/HLU79zQ.md.jpg)](https://freeimage.host/i/HLU79zQ)
 ## Live Demo Link
-Please note that the app is in dev stage, it's not possible to deploy, becasue email won't be listed in the Test Users table in Google Calendar API dashboard. [Live Demo Link](https://github.com/kamilaut/meet/blob/main/livedemo.mp4)
+Please note that the app is in dev stage, it's not possible to deploy, becasue email won't be listed in the Test Users table in Google Calendar API dashboard. [Showcase Video](https://drive.google.com/file/d/1VgVrIa80DZENpAqIVdC6HTq213K8hWAL/view?usp=sharing)
 ## Built With
 
 **React:** JavaScript library for building user interfaces.
@@ -31,7 +31,7 @@ Please note that the app is in dev stage, it's not possible to deploy, becasue e
 **GitHub Pages:** Deployment platform for the application.
 
 
-**React Axios:** Used for API calls with async/await syntax.
+**Axios:** Used for API calls with async/await syntax.
 
 
 **Rechart.js:** Data visualization library for creating charts.
@@ -40,7 +40,7 @@ Please note that the app is in dev stage, it's not possible to deploy, becasue e
 **Testing Framework:** Used to write tests with a coverage rate of 90% or higher. Puppeteer (EndToEnd testing), Jest-Cucumber(Acceptance/BDD Testing), Enzyme (TDD).
 
 
-**Online Monitoring Tool:** Implemented to monitor the application's performance and usage.
+**Atatus:** Implemented to monitor the application's performance and usage.
 
 
 **Oauth2**
